@@ -2,19 +2,20 @@ from via6522_2_asm import via6522
 from reset import rst
 from lcd_2_asm import lcd
 
-
-def main():
+def buildAsmCode():
     via = via6522();
     resetall =rst();
     display = lcd(via.getPorta(),via.getPorta(),via.getDdra(),via.getDdrb());
-
-    print(via.getPorta());
-    print(via.getPortb());
-    print(via.getDdra());
-    print(via.getDdrb());
-    print(resetall.reset());
+    asmCode = "";
+    asmCode += resetall.reset();
     display.initilializeLcd();
-    print (display.getBin());
+    asmCode += display.getBin();
+    print (asmCode);
+
+
+
+def main():
+    buildAsmCode();
     
 
 
