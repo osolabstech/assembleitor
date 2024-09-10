@@ -14,13 +14,6 @@ def buildAsmCode():
     display.initilializeLcd();
     asmCode += display.getBin();
     util.saveBinFile(asmCode=asmCode,filename="code.bin",filesize=32768);
-    # asmCodeByte=bytes.fromhex(asmCode);
-    # print (asmCode);
-    # print(asmCodeByte);
-    # with open("code.bin","wb") as out_file:
-    #  out_file.write(asmCodeByte);
-
-
 
 def main():
     buildAsmCode();
