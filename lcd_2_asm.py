@@ -1,3 +1,5 @@
+import random
+
 class lcd(object):
 
 
@@ -35,6 +37,35 @@ class lcd(object):
         self.bin +="8D";
         self.bin +=self.ddra;
         #   ;END Initialize LCD Display
+
+    def fillRandomLine(self,lenght=20,pattern=["/","\\"],patternLcd=[0x2f,0xfa]):
+        line=[];
+        lineLcd=[];
+        for position in range(0,lenght):
+            r=random.randrange(0,2);
+            line.append(pattern[r]); #includes 0 and 1 but not 2
+            lineLcd.append(patternLcd[r]);
+        return line,lineLcd
+
+    def displayLinesLcd(self,lineMatrix=[]):
+        for line in lineMatrix:
+            print(''.join(line));
+        #the final one instead of printing a pattern will generate the assembler code to display each line
     
-    def getBin(self):
-        return self.bin
+    def displayLinesLcdWindow(self,lineMatrix=[],startWindow=0,linesWindow=4):
+        for line in range(startWindow,startWindow+linesWindow):
+            print(''.join(lineMatrix[line]));
+        #the final one instead of printing a pattern will generate the assembler code to display each line
+
+    def tenPrintline(self,lenght=20,lines=4,allLines=6):
+        lineMatrix=[];
+        lineMatrixLcd=[];
+        for i in range(0,allLines):
+            line,lineLcd=self.fillRandomLine(lenght);
+            lineMatrix.append(line);
+            lineMatrixLcd.append(lineLcd);
+        for startWindow in range(0,allLines-lines):
+            self.displayLinesLcdWindow(lineMatrix,startWindow,lines);
+
+    
+
